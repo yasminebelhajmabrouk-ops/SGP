@@ -1,0 +1,118 @@
+<div class="patient-detail" *ngIf="patient; else notFound">
+  <div class="detail-header">
+    <button class="btn btn-back" onclick="window.history.back()">← Retour</button>
+    <div class="header-actions">
+      <button (click)="editPatient()" class="btn btn-primary">✏️ Modifier</button>
+      <button (click)="deletePatient()" class="btn btn-danger">🗑️ Supprimer</button>
+    </div>
+  </div>
+
+  <app-patient-card
+    [patient]="patient"
+    [showSensitiveData]="true"
+    (urgenceSignalee)="onUrgence($event)"
+  ></app-patient-card>
+
+  <div class="detail-sections">
+    <section class="detail-section" *ngIf="patient.allergies.length > 0">
+      <h3>Allergies Documentées</h3>
+      <div class="allergies-list">
+        <div *ngFor="let allergie of patient.allergies; trackBy: trackByIndex" class="allergie-item">
+          <strong>{{ allergie.substance }}</strong>
+          <p>Réaction: {{ allergie.reaction }}</p>
+          <p>Sévérité: <span class="severity" [class]="'severity--' + allergie.severite">{{ allergie.severite }}</span></p>
+          <p class="date">Déclarée le: {{ allergie.dateDeclaration | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-section" *ngIf="patient.antecedents.length > 0">
+      <h3>Antécédents</h3>
+      <ul class="antecedents-list">
+        <li *ngFor="let antecedent of patient.antecedents; trackBy: trackByIndex">{{ antecedent }}</li>
+      </ul>
+    </section>
+
+    <section class="detail-section" *ngIf="patient.dernieresConstantes">
+      <h3>Dernières Constantes Vitales</h3>
+      <div class="vitals-grid">
+        <div class="vital-item" *ngIf="patient.dernieresConstantes.tensionSystolique">
+          <span class="vital-label">Tension Systolique</span>
+          <span class="vital-value">{{ patient.dernieresConstantes.tensionSystolique }} mmHg</span>
+        </div>
+        <div class="vital-item" *ngIf="patient.dernieresConstantes.tensionDiastolique">
+          <span class="vital-label">Tension Diastolique</span>
+          <span class="vital-value">{{ patient.dernieresConstantes.tensionDiastolique }} mmHg</span>
+        </div>
+        <div class="vital-item" *ngIf="patient.dernieresConstantes.frequenceCardiaque">
+          <span class="vital-label">Fréquence Cardiaque</span>
+          <span class="vital-value">{{ patient.dernieresConstantes.frequenceCardiaque }} bpm</span>
+        </div>
+        <div class="vital-item" *ngIf="patient.dernieresConstantes.temperature">
+          <span class="vital-label">Température</span>
+          <span class="vital-value">{{ patient.dernieresConstantes.temperature }}°C</span>
+        </div>
+        <div class="vital-item" *ngIf="patient.dernieresConstantes.saturationO2">
+          <span class="vital-label">Saturation O2</span>
+          <span class="vital-value">{{ patient.dernieresConstantes.saturationO2 }}%</span>
+        </div>
+        <div class="vital-item" *ngIf="patient.dernieresConstantes.poids">
+          <span class="vital-label">Poids</span>
+          <span class="vital-value">{{ patient.dernieresConstantes.poids }} kg</span>
+        </div>
+        <div class="vital-item" *ngIf="patient.dernieresConstantes.taille">
+          <span class="vital-label">Taille</span>
+          <span class="vital-value">{{ patient.dernieresConstantes.taille }} cm</span>
+        </div>
+        <div class="vital-item">
+          <span class="vital-label">Mesure du</span>
+          <span class="vital-value">{{ patient.dernieresConstantes.dateMesure | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-section consultations-section">
+      <div class="section-header">
+        <h3>Consultations</h3>
+        <button class="btn btn-sm btn-primary" (click)="toggleConsultationForm()">
+          {{ showConsultationForm ? '- Fermer' : '+ Nouvelle consultation' }}
+        </button>
+      </div>
+
+      <app-consultation-form
+        *ngIf="showConsultationForm"
+        [patientId]="patient.id"
+        (consultationAdded)="onConsultationAdded($event)"
+      ></app-consultation-form>
+
+      <app-consultation-list
+        [patientId]="patient.id"
+      ></app-consultation-list>
+    </section>
+
+    <section class="detail-section ordonnances-section">
+      <div class="section-header">
+        <h3>Ordonnances</h3>
+        <button class="btn btn-sm btn-primary" (click)="toggleOrdonnanceForm()">
+          {{ showOrdonnanceForm ? '- Fermer' : '+ Nouvelle ordonnance' }}
+        </button>
+      </div>
+
+      <app-ordonnance-form
+        *ngIf="showOrdonnanceForm"
+        [patientId]="patient.id"
+        (ordonnanceAdded)="onOrdonnanceAdded($event)"
+      ></app-ordonnance-form>
+
+      <app-ordonnance-list
+        [patientId]="patient.id"
+      ></app-ordonnance-list>
+    </section>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="not-found">
+    <p>Patient non trouvé</p>
+  </div>
+</ng-template>

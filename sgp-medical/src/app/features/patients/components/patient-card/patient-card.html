@@ -1,0 +1,75 @@
+<div class="patient-card" (click)="selectPatient()">
+  <div class="patient-card__badge">
+    <div class="badge-circle">{{ initiales }}</div>
+  </div>
+
+  <div class="patient-card__header">
+    <div class="header-name">
+      <h3>{{ patient.prenom }} {{ patient.nom }}</h3>
+      <span class="age">{{ age }} ans</span>
+    </div>
+    <div class="header-urgency">
+      <div
+        class="urgency-indicator"
+        [style.background-color]="getUrgencyColor()"
+        [title]="patient.niveauUrgence || 'Aucun'"
+      ></div>
+    </div>
+  </div>
+
+  <div class="patient-card__body">
+    <!-- INS (masqué si !showSensitiveData) -->
+    <div class="info-row">
+      <span class="label">INS:</span>
+      <span class="value">
+        {{ showSensitiveData ? (patient.ins | insFormat) : '***' }}
+      </span>
+    </div>
+
+    <!-- Statut -->
+    <div class="info-row">
+      <span class="label">Statut:</span>
+      <span class="value status" [class]="'status--' + patient.statut">
+        {{ patient.statut }}
+      </span>
+    </div>
+
+    <!-- Groupe sanguin -->
+    <div class="info-row" *ngIf="patient.groupeSanguin">
+      <span class="label">Groupe sanguin:</span>
+      <span class="value">{{ patient.groupeSanguin }}</span>
+    </div>
+
+    <!-- Contact -->
+    <div class="info-row">
+      <span class="label">Tél:</span>
+      <span class="value">{{ patient.telephone }}</span>
+    </div>
+
+    <!-- Allergies -->
+    <div class="info-row" *ngIf="patient.allergies.length > 0">
+      <span class="label">Allergies:</span>
+      <div class="allergies">
+        <span *ngFor="let allergie of patient.allergies" class="allergie" [style.border-color]="getSeverityColor(allergie.severite)">
+          {{ allergie.substance }} <span class="severity">({{ allergie.severite }})</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Traitements -->
+    <div class="info-row" *ngIf="patient.traitementEnCours.length > 0">
+      <span class="label">Traitements:</span>
+      <div class="treatments">
+        <span *ngFor="let treatment of patient.traitementEnCours" class="treatment">
+          💊 {{ treatment }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="patient-card__footer">
+    <button (click)="signalerUrgence('Situation d\'urgence'); $event.stopPropagation()" class="btn btn-urgence">
+      ⚠️ Urgence
+    </button>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="patient-list">
+  <div class="patient-list__header">
+    <h1>Liste des Patients</h1>
+    <button (click)="createNewPatient()" class="btn btn-primary">
+      + Nouveau Patient
+    </button>
+  </div>
+
+  <div class="patient-list__filters">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Rechercher par nom, prénom ou INS..."
+      [value]="searchTerm"
+      (input)="search($event.target.value)"
+    />
+    <select [(ngModel)]="sortBy" (change)="filterAndSort()" class="sort-select">
+      <option value="nom">Trier par nom</option>
+      <option value="dateCreation">Trier par date</option>
+    </select>
+  </div>
+
+  <div class="patient-list__count">
+    {{ filteredPatients.length }} patient(s) trouvé(s)
+  </div>
+
+  <div class="patient-list__items" *ngIf="filteredPatients.length > 0">
+    <div
+      *ngFor="let patient of filteredPatients; trackBy: trackById"
+      class="patient-item"
+      (click)="selectPatient(patient)"
+    >
+      <div class="patient-item__urgency">
+        <div
+          class="urgency-badge"
+          [style.background-color]="getUrgencyColor(patient.niveauUrgence)"
+          [title]="patient.niveauUrgence"
+        ></div>
+      </div>
+      <div class="patient-item__content">
+        <div class="patient-item__name">
+          {{ patient.prenom }} {{ patient.nom }}
+          <span class="patient-item__status" [class]="'status--' + patient.statut">
+            {{ patient.statut }}
+          </span>
+        </div>
+        <div class="patient-item__details">
+          <span class="detail">INS: {{ patient.ins | insFormat }}</span>
+          <span class="detail">Âge: {{ patient.dateNaissance | age }} ans</span>
+          <span class="detail">Sexe: {{ patient.sexe }}</span>
+        </div>
+        <div class="patient-item__treatments">
+          <span *ngFor="let treatment of patient.traitementEnCours.slice(0, 2); trackBy: trackByIndex" class="treatment">
+            {{ treatment }}
+          </span>
+          <span *ngIf="patient.traitementEnCours.length > 2" class="more">
+            +{{ patient.traitementEnCours.length - 2 }}
+          </span>
+        </div>
+      </div>
+      <div class="patient-item__allergies" *ngIf="patient.allergies.length > 0">
+        ⚠️ {{ patient.allergies.length }} allergie(s)
+      </div>
+    </div>
+  </div>
+
+  <div class="patient-list__empty" *ngIf="filteredPatients.length === 0">
+    <p>Aucun patient trouvé</p>
+  </div>
+</div>

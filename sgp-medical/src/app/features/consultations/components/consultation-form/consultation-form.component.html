@@ -1,0 +1,78 @@
+<div class="consultation-form">
+  <h3>Nouvelle Consultation</h3>
+
+  <form [formGroup]="consultationForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="dateConsultation">Date de Consultation *</label>
+        <input
+          id="dateConsultation"
+          type="date"
+          formControlName="dateConsultation"
+          class="form-control"
+          [class.is-invalid]="submitted && dateConsultation?.invalid"
+        />
+        <div class="error" *ngIf="submitted && dateConsultation?.invalid">
+          La date est requise
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="medecin">Médecin *</label>
+        <input
+          id="medecin"
+          type="text"
+          formControlName="medecin"
+          placeholder="Nom du médecin"
+          class="form-control"
+          [class.is-invalid]="submitted && medecin?.invalid"
+        />
+        <div class="error" *ngIf="submitted && medecin?.invalid">
+          Le nom du médecin est requis (min 3 caractères)
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="diagnostic">Diagnostic *</label>
+      <textarea
+        id="diagnostic"
+        formControlName="diagnostic"
+        placeholder="Diagnostic médical"
+        class="form-control"
+        [class.is-invalid]="submitted && diagnostic?.invalid"
+        rows="3"
+      ></textarea>
+      <div class="error" *ngIf="submitted && diagnostic?.invalid">
+        Le diagnostic est requis (min 5 caractères)
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="observations">Observations</label>
+      <textarea
+        id="observations"
+        formControlName="observations"
+        placeholder="Observations additionnelles"
+        class="form-control"
+        rows="2"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="traitement">Traitement Recommandé</label>
+      <textarea
+        id="traitement"
+        formControlName="traitement"
+        placeholder="Traitement ou recommandations"
+        class="form-control"
+        rows="2"
+      ></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Enregistrer Consultation</button>
+      <button type="button" (click)="resetForm()" class="btn btn-secondary">Réinitialiser</button>
+    </div>
+  </form>
+</div>

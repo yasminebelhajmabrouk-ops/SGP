@@ -1,0 +1,213 @@
+<div class="ordonnance-form">
+  <h3>Nouvelle Ordonnance</h3>
+
+  <form [formGroup]="ordonnanceForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="dateOrdonnance">Date de l'ordonnance *</label>
+        <input
+          type="date"
+          id="dateOrdonnance"
+          formControlName="dateOrdonnance"
+          class="form-control"
+          [class.is-invalid]="submitted && ordonnanceForm.get('dateOrdonnance')?.invalid"
+        >
+        <div class="error" *ngIf="submitted && ordonnanceForm.get('dateOrdonnance')?.hasError('required')">
+          La date est requise
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="medecin">Médecin *</label>
+        <input
+          type="text"
+          id="medecin"
+          formControlName="medecin"
+          class="form-control"
+          placeholder="Dr. Prénom Nom"
+          [class.is-invalid]="submitted && ordonnanceForm.get('medecin')?.invalid"
+        >
+        <div class="error" *ngIf="submitted && ordonnanceForm.get('medecin')?.hasError('required')">
+          Le nom du médecin est requis
+        </div>
+        <div class="error" *ngIf="submitted && ordonnanceForm.get('medecin')?.hasError('minlength')">
+          Le nom du médecin doit contenir au moins 3 caractères
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="observations">Observations</label>
+      <textarea
+        id="observations"
+        formControlName="observations"
+        class="form-control"
+        placeholder="Remarques supplémentaires..."
+        rows="2"
+        [class.is-invalid]="submitted && ordonnanceForm.get('observations')?.invalid"
+      ></textarea>
+      <div class="error" *ngIf="submitted && ordonnanceForm.get('observations')?.hasError('minlength')">
+        Les observations doivent contenir au moins 5 caractères
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dureeValidite">Durée de validité (jours) *</label>
+      <input
+        type="number"
+        id="dureeValidite"
+        formControlName="dureeValidite"
+        class="form-control"
+        min="1"
+        max="365"
+        [class.is-invalid]="submitted && ordonnanceForm.get('dureeValidite')?.invalid"
+      >
+      <div class="error" *ngIf="submitted && ordonnanceForm.get('dureeValidite')?.hasError('required')">
+        La durée de validité est requise
+      </div>
+      <div class="error" *ngIf="submitted && ordonnanceForm.get('dureeValidite')?.hasError('min')">
+        La durée doit être d'au moins 1 jour
+      </div>
+      <div class="error" *ngIf="submitted && ordonnanceForm.get('dureeValidite')?.hasError('max')">
+        La durée ne peut pas dépasser 365 jours
+      </div>
+    </div>
+
+    <div class="medications-section">
+      <div class="medications-header">
+        <h4>Médicaments</h4>
+        <button
+          type="button"
+          class="btn btn-sm btn-secondary"
+          (click)="addMedication()"
+        >
+          + Ajouter un médicament
+        </button>
+      </div>
+
+      <div formArrayName="medicaments" class="medications-list">
+        <div
+          *ngFor="let medication of medicaments.controls; let i = index"
+          [formGroupName]="i"
+          class="medication-item"
+        >
+          <div class="medication-header">
+            <h5>Médicament {{ i + 1 }}</h5>
+            <button
+              *ngIf="medicaments.length > 1"
+              type="button"
+              class="btn btn-sm btn-danger"
+              (click)="removeMedication(i)"
+            >
+              Supprimer
+            </button>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label [for]="'nom-' + i">Nom du médicament *</label>
+              <input
+                type="text"
+                [id]="'nom-' + i"
+                formControlName="nom"
+                class="form-control"
+                placeholder="Ex: Amoxicilline"
+                [class.is-invalid]="submitted && medication.get('nom')?.invalid"
+              >
+              <div class="error" *ngIf="submitted && medication.get('nom')?.hasError('required')">
+                Le nom du médicament est requis
+              </div>
+              <div class="error" *ngIf="submitted && medication.get('nom')?.hasError('minlength')">
+                Le nom doit contenir au moins 3 caractères
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label [for]="'dosage-' + i">Dosage *</label>
+              <input
+                type="text"
+                [id]="'dosage-' + i"
+                formControlName="dosage"
+                class="form-control"
+                placeholder="Ex: 500mg"
+                [class.is-invalid]="submitted && medication.get('dosage')?.invalid"
+              >
+              <div class="error" *ngIf="submitted && medication.get('dosage')?.hasError('required')">
+                Le dosage est requis
+              </div>
+              <div class="error" *ngIf="submitted && medication.get('dosage')?.hasError('minlength')">
+                Le dosage doit contenir au moins 2 caractères
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label [for]="'frequence-' + i">Fréquence *</label>
+              <input
+                type="text"
+                [id]="'frequence-' + i"
+                formControlName="frequence"
+                class="form-control"
+                placeholder="Ex: 3 fois par jour"
+                [class.is-invalid]="submitted && medication.get('frequence')?.invalid"
+              >
+              <div class="error" *ngIf="submitted && medication.get('frequence')?.hasError('required')">
+                La fréquence est requise
+              </div>
+              <div class="error" *ngIf="submitted && medication.get('frequence')?.hasError('minlength')">
+                La fréquence doit contenir au moins 5 caractères
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label [for]="'duree-' + i">Durée *</label>
+              <input
+                type="text"
+                [id]="'duree-' + i"
+                formControlName="duree"
+                class="form-control"
+                placeholder="Ex: 7 jours"
+                [class.is-invalid]="submitted && medication.get('duree')?.invalid"
+              >
+              <div class="error" *ngIf="submitted && medication.get('duree')?.hasError('required')">
+                La durée est requise
+              </div>
+              <div class="error" *ngIf="submitted && medication.get('duree')?.hasError('minlength')">
+                La durée doit contenir au moins 5 caractères
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label [for]="'posologie-' + i">Posologie</label>
+            <textarea
+              [id]="'posologie-' + i"
+              formControlName="posologie"
+              class="form-control"
+              placeholder="Ex: 1 comprimé le matin, 1 le soir pendant les repas"
+              rows="2"
+              [class.is-invalid]="submitted && medication.get('posologie')?.invalid"
+            ></textarea>
+            <div class="error" *ngIf="submitted && medication.get('posologie')?.hasError('minlength')">
+              La posologie doit contenir au moins 5 caractères
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="error" *ngIf="submitted && medicaments.length === 0">
+        Au moins un médicament est requis
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">
+        Créer l'ordonnance
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">
+        Réinitialiser
+      </button>
+    </div>
+  </form>
+</div>

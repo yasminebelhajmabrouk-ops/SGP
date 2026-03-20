@@ -1,0 +1,204 @@
+.patient-list {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      color: var(--text-primary);
+    }
+  }
+
+  &__filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+
+    .search-input,
+    .sort-select {
+      padding: 10px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 14px;
+      min-width: 200px;
+      background-color: var(--dark-bg-tertiary);
+      color: var(--text-primary);
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.15);
+      }
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 300px;
+    }
+  }
+
+  &__count {
+    margin-bottom: 15px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  &__items {
+    display: grid;
+    gap: 10px;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-disabled);
+    font-size: 16px;
+  }
+}
+
+.patient-item {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  background: var(--dark-bg-secondary);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary-color);
+
+  &:hover {
+    background: var(--dark-bg-hover);
+    box-shadow: 0 2px 8px rgba(74, 158, 255, 0.2);
+    transform: translateX(4px);
+    border-color: var(--primary-color);
+  }
+
+  &__urgency {
+    display: flex;
+    align-items: center;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__status {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: normal;
+    text-transform: capitalize;
+
+    &--actif {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    &--inactif {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    &--decede {
+      background: #e2e3e5;
+      color: #383d41;
+    }
+
+    &--transfere {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+  }
+
+  &__details {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+
+    .detail {
+      white-space: nowrap;
+    }
+  }
+
+  &__treatments {
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    .treatment {
+      background: #e8f4f8;
+      padding: 2px 8px;
+      border-radius: 3px;
+      padding: 4px 8px;
+    }
+
+    .more {
+      padding: 2px 8px;
+      color: #007bff;
+      font-weight: bold;
+    }
+  }
+
+  &__allergies {
+    padding: 8px 12px;
+    background: #fff3cd;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #856404;
+    white-space: nowrap;
+  }
+}
+
+.urgency-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &-primary {
+    background: #007bff;
+    color: white;
+
+    &:hover {
+      background: #0056b3;
+      box-shadow: 0 4px 8px rgba(0, 86, 179, 0.3);
+    }
+  }
+}

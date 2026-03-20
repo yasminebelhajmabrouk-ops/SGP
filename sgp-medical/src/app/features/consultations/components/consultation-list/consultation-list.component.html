@@ -1,0 +1,49 @@
+<div class="consultation-list">
+  <h3>Historique des Consultations</h3>
+
+  <div *ngIf="consultations.length === 0" class="empty-state">
+    <p>Aucune consultation enregistrée pour ce patient.</p>
+  </div>
+
+  <div *ngIf="consultations.length > 0" class="consultations-container">
+    <div
+      *ngFor="let consultation of consultations; trackBy: trackByConsultationId"
+      class="consultation-card"
+    >
+      <div class="card-header">
+        <div class="header-info">
+          <h4>{{ consultation.medecin }}</h4>
+          <p class="date">{{ consultation.dateConsultation | date: 'dd/MM/yyyy' }}</p>
+        </div>
+        <button
+          class="btn btn-sm btn-danger"
+          (click)="deleteConsultation(consultation.id)"
+          title="Supprimer cette consultation"
+        >
+          Supprimer
+        </button>
+      </div>
+
+      <div class="card-body">
+        <div class="section">
+          <h5>Diagnostic</h5>
+          <p>{{ consultation.diagnostic }}</p>
+        </div>
+
+        <div *ngIf="consultation.observations" class="section">
+          <h5>Observations</h5>
+          <p>{{ consultation.observations }}</p>
+        </div>
+
+        <div *ngIf="consultation.traitement" class="section">
+          <h5>Traitement Recommandé</h5>
+          <p>{{ consultation.traitement }}</p>
+        </div>
+
+        <div class="meta">
+          <small>Créé le {{ consultation.dateCreation | date: 'dd/MM/yyyy à HH:mm' }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

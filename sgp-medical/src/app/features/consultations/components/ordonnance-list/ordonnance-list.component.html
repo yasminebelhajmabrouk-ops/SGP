@@ -1,0 +1,71 @@
+<div class="ordonnance-list">
+  <h3>Ordonnances</h3>
+
+  <div *ngIf="ordonnances.length === 0" class="empty-state">
+    <p>Aucune ordonnance enregistrée pour ce patient.</p>
+  </div>
+
+  <div *ngIf="ordonnances.length > 0" class="ordonnances-container">
+    <div
+      *ngFor="let ordonnance of ordonnances; trackBy: trackByOrdonnanceId"
+      class="ordonnance-card"
+      [class.expired]="isExpired(ordonnance)"
+    >
+      <div class="card-header">
+        <div class="header-info">
+          <h4>{{ ordonnance.medecin }}</h4>
+          <p class="date">{{ ordonnance.dateOrdonnance | date: 'dd/MM/yyyy' }}</p>
+        </div>
+        <div class="status-badge" [class.valid]="!isExpired(ordonnance)" [class.expired]="isExpired(ordonnance)">
+          <span *ngIf="!isExpired(ordonnance)">
+            Valide ({{ getRemainingDays(ordonnance) }}j)
+          </span>
+          <span *ngIf="isExpired(ordonnance)">
+            Expirée
+          </span>
+        </div>
+        <button
+          class="btn btn-sm btn-danger"
+          (click)="deleteOrdonnance(ordonnance.id)"
+          title="Supprimer cette ordonnance"
+        >
+          Supprimer
+        </button>
+      </div>
+
+      <div class="card-body">
+        <div class="medications-section">
+          <h5>Médicaments</h5>
+          <div class="medications-list">
+            <div
+              *ngFor="let medication of ordonnance.medicaments; trackBy: trackByMedicationIndex"
+              class="medication-item"
+            >
+              <div class="medication-info">
+                <h6>{{ medication.nom }}</h6>
+                <ul class="details">
+                  <li><strong>Dosage:</strong> {{ medication.dosage }}</li>
+                  <li><strong>Fréquence:</strong> {{ medication.frequence }}</li>
+                  <li><strong>Durée:</strong> {{ medication.duree }}</li>
+                  <li *ngIf="medication.posologie"><strong>Posologie:</strong> {{ medication.posologie }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="ordonnance.observations" class="section">
+          <h5>Observations</h5>
+          <p>{{ ordonnance.observations }}</p>
+        </div>
+
+        <div class="meta">
+          <small>
+            Créée le {{ ordonnance.dateCreation | date: 'dd/MM/yyyy' }} | 
+            Valide {{ ordonnance.dureeValidite }} jours
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

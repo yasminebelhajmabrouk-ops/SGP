@@ -1,0 +1,65 @@
+<div class="login-container">
+  <div class="login-box">
+    <h1>Connexion</h1>
+    <p class="subtitle">SGP - Système de Gestion de Patients</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="exemple@medical.fr"
+          [class.is-invalid]="submitted && email?.invalid"
+        />
+        <div class="error-message" *ngIf="submitted && email?.invalid">
+          <span *ngIf="email?.errors?.['required']">Email requis</span>
+          <span *ngIf="email?.errors?.['email']">Format email invalide</span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Minimum 6 caractères"
+          [class.is-invalid]="submitted && password?.invalid"
+        />
+        <div class="error-message" *ngIf="submitted && password?.invalid">
+          <span *ngIf="password?.errors?.['required']">Mot de passe requis</span>
+          <span *ngIf="password?.errors?.['minlength']">Minimum 6 caractères</span>
+        </div>
+      </div>
+
+      <!-- Role Selection -->
+      <div class="form-group">
+        <label for="role">Rôle</label>
+        <select id="role" formControlName="role">
+          <option *ngFor="let r of roles; trackBy: trackByIndex" [value]="r">
+            {{ r | titlecase }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Demo Info -->
+      <div class="info-box">
+        <p><strong>Mode Démo:</strong> Utilisez n'importe quel email/mot de passe pour tester.</p>
+        <p><strong>Rôles disponibles:</strong> Médecin, Infirmier, Admin, Patient</p>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="loading || loginForm.invalid"
+      >
+        {{ loading ? 'Connexion...' : 'Se connecter' }}
+      </button>
+    </form>
+  </div>
+</div>

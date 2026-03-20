@@ -1,0 +1,236 @@
+<div class="patient-form-container">
+  <div class="form-header">
+    <h2>{{ isEditMode ? 'Modifier Patient' : 'Créer un Nouveau Patient' }}</h2>
+  </div>
+
+  <form [formGroup]="patientForm" (ngSubmit)="onSubmit()" class="patient-form">
+    <div class="form-section">
+      <h3>Identité</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nom">Nom *</label>
+          <input
+            id="nom"
+            type="text"
+            formControlName="nom"
+            class="form-control"
+            [class.is-invalid]="submitted && patientForm.get('nom')?.invalid"
+          />
+          <div class="error" *ngIf="submitted && patientForm.get('nom')?.invalid">
+            Le nom est requis
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="prenom">Prénom *</label>
+          <input
+            id="prenom"
+            type="text"
+            formControlName="prenom"
+            class="form-control"
+            [class.is-invalid]="submitted && patientForm.get('prenom')?.invalid"
+          />
+          <div class="error" *ngIf="submitted && patientForm.get('prenom')?.invalid">
+            Le prénom est requis
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="dateNaissance">Date de Naissance *</label>
+          <input
+            id="dateNaissance"
+            type="date"
+            formControlName="dateNaissance"
+            class="form-control"
+            [class.is-invalid]="submitted && patientForm.get('dateNaissance')?.invalid"
+          />
+          <div class="error" *ngIf="submitted && patientForm.get('dateNaissance')?.invalid">
+            La date de naissance est requise
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sexe">Sexe *</label>
+          <select
+            id="sexe"
+            formControlName="sexe"
+            class="form-control"
+            [class.is-invalid]="submitted && patientForm.get('sexe')?.invalid"
+          >
+            <option value="">-- Sélectionner --</option>
+            <option value="M">Masculin</option>
+            <option value="F">Féminin</option>
+            <option value="I">Indéterminé</option>
+            <option value="U">Inconnu</option>
+          </select>
+          <div class="error" *ngIf="submitted && patientForm.get('sexe')?.invalid">
+            Le sexe est requis
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ins">INS (Identité Nationale de Santé) *</label>
+          <input
+            id="ins"
+            type="text"
+            formControlName="ins"
+            placeholder="Numéro INS (13 chiffres)"
+            class="form-control"
+            [class.is-invalid]="submitted && patientForm.get('ins')?.invalid"
+          />
+          <div class="error" *ngIf="submitted && patientForm.get('ins')?.invalid">
+            L'INS est requis
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="groupeSanguin">Groupe Sanguin</label>
+          <select id="groupeSanguin" formControlName="groupeSanguin" class="form-control">
+            <option value="">-- Sélectionner --</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Coordonnées</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="telephone">Téléphone *</label>
+          <input
+            id="telephone"
+            type="tel"
+            formControlName="telephone"
+            class="form-control"
+            [class.is-invalid]="submitted && patientForm.get('telephone')?.invalid"
+          />
+          <div class="error" *ngIf="submitted && patientForm.get('telephone')?.invalid">
+            Le téléphone est requis
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="form-control"
+            [class.is-invalid]="submitted && patientForm.get('email')?.invalid"
+          />
+          <div class="error" *ngIf="submitted && patientForm.get('email')?.invalid">
+            Email invalide
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="adresse_ligne1">Adresse *</label>
+        <input
+          id="adresse_ligne1"
+          type="text"
+          formControlName="adresse_ligne1"
+          class="form-control"
+          [class.is-invalid]="submitted && patientForm.get('adresse_ligne1')?.invalid"
+        />
+        <div class="error" *ngIf="submitted && patientForm.get('adresse_ligne1')?.invalid">
+          L'adresse est requise
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="adresse_codePostal">Code Postal *</label>
+          <input
+            id="adresse_codePostal"
+            type="text"
+            formControlName="adresse_codePostal"
+            class="form-control"
+            [class.is-invalid]="submitted && patientForm.get('adresse_codePostal')?.invalid"
+          />
+          <div class="error" *ngIf="submitted && patientForm.get('adresse_codePostal')?.invalid">
+            Le code postal est requis
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="adresse_ville">Ville *</label>
+          <input
+            id="adresse_ville"
+            type="text"
+            formControlName="adresse_ville"
+            class="form-control"
+            [class.is-invalid]="submitted && patientForm.get('adresse_ville')?.invalid"
+          />
+          <div class="error" *ngIf="submitted && patientForm.get('adresse_ville')?.invalid">
+            La ville est requise
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Médecin Traitant</h3>
+
+      <div class="form-group">
+        <label for="medecinTraitantId">Médecin Traitant *</label>
+        <select
+          id="medecinTraitantId"
+          formControlName="medecinTraitantId"
+          class="form-control"
+          [class.is-invalid]="submitted && patientForm.get('medecinTraitantId')?.invalid"
+        >
+          <option value="">-- Sélectionner --</option>
+          <option value="doc-001">Dr. Martin Rousseau</option>
+          <option value="doc-002">Dr. Sophie Laurent</option>
+          <option value="doc-003">Dr. Jean Dupont</option>
+        </select>
+        <div class="error" *ngIf="submitted && patientForm.get('medecinTraitantId')?.invalid">
+          Le médecin traitant est requis
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Consentement</h3>
+
+      <div class="form-group checkbox">
+        <input
+          id="consentement"
+          type="checkbox"
+          formControlName="consentement"
+          [class.is-invalid]="submitted && patientForm.get('consentement')?.invalid"
+        />
+        <label for="consentement">
+          J'accepte que mes données de santé soient traitées conformément à la réglementation RGPD et HDS *
+        </label>
+        <div class="error" *ngIf="submitted && patientForm.get('consentement')?.invalid">
+          Vous devez accepter les conditions
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">
+        {{ isEditMode ? 'Enregistrer' : 'Créer Patient' }}
+      </button>
+      <button type="button" (click)="cancel()" class="btn btn-secondary">
+        Annuler
+      </button>
+    </div>
+  </form>
+</div>

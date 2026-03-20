@@ -1,0 +1,220 @@
+.patient-detail {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  .detail-sections {
+    margin-top: 30px;
+  }
+
+  .detail-section {
+    background: var(--dark-bg-secondary);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary-color);
+
+    h3 {
+      margin: 0 0 15px 0;
+      font-size: 18px;
+      color: var(--text-primary);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      h3 {
+        margin: 0;
+        flex: 1;
+      }
+
+      .btn-sm {
+        padding: 6px 12px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+    }
+
+    &.consultations-section {
+      border-left-color: var(--primary-color);
+    }
+
+    &.ordonnances-section {
+      border-left-color: var(--primary-color);
+    }
+  }
+}
+
+.allergies-list {
+  display: grid;
+  gap: 15px;
+
+  .allergie-item {
+    padding: 15px;
+    background: rgba(245, 158, 11, 0.1);
+    border-left: 3px solid var(--warning-color);
+    border-radius: 4px;
+
+    strong {
+      display: block;
+      color: var(--warning-light);
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    p {
+      margin: 5px 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+
+      &.date {
+        font-size: 12px;
+        opacity: 0.8;
+        color: var(--text-muted);
+      }
+    }
+
+    .severity {
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-weight: bold;
+      font-size: 12px;
+
+      &--legere {
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--danger-light);
+      }
+
+      &--moderee {
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--warning-light);
+      }
+
+      &--severe {
+        background: rgba(239, 68, 68, 0.25);
+        color: #ff7675;
+      }
+    }
+  }
+}
+
+.antecedents-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 10px;
+    background: rgba(74, 158, 255, 0.08);
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary-color);
+    color: var(--text-secondary);
+  }
+}
+
+.vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+
+  .vital-item {
+    padding: 15px;
+    background: var(--dark-bg-tertiary);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+  }
+
+  .vital-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .vital-value {
+    display: block;
+    font-size: 20px;
+    color: var(--text-primary);
+    font-weight: bold;
+  }
+}
+
+.not-found {
+  padding: 40px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 18px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &-back {
+    background: var(--dark-bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+
+    &:hover {
+      background: var(--dark-bg-hover);
+      border-color: var(--primary-color);
+    }
+  }
+
+  &-primary {
+    background: var(--primary-color);
+    color: white;
+
+    &:hover {
+      background: var(--primary-dark);
+    }
+
+    &.btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
+
+  &-danger {
+    background: var(--danger-color);
+    color: white;
+
+    &:hover {
+      background: #dc2626;
+    }
+  }
+
+  &-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

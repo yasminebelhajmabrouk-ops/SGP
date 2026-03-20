@@ -1,0 +1,167 @@
+/* Global Styles - Professional Medical Application */
+
+/* Reset et base styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  color: #f5f5f5;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Scrollbar personnalisée sombre */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5a6a7a;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #7a8a9a;
+  }
+}
+
+/* Selection text color */
+::selection {
+  background-color: rgba(59, 130, 246, 0.5);
+  color: #fff;
+}
+
+/* Focus styles */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid rgba(74, 158, 255, 0.6);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Form elements styling */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="search"],
+textarea,
+select {
+  border: 1px solid #e0e3e8;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 14px;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: #0b5394;
+  }
+
+  &:focus {
+    border-color: #0b5394;
+    background-color: #f8fafb;
+    box-shadow: 0 0 0 3px rgba(11, 83, 148, 0.1);
+  }
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+/* Button base styles */
+button,
+input[type="button"],
+input[type="submit"] {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  padding: 10px 18px;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  transition: color 0.25s ease;
+
+  &:focus-visible {
+    outline: 2px solid #0b5394;
+    outline-offset: 2px;
+  }
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e3e8;
+}
+
+th {
+  background-color: #f8fafb;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Utility classes for animations */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

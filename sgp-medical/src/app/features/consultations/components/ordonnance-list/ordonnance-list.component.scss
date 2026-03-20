@@ -1,0 +1,228 @@
+.ordonnance-list {
+  margin-bottom: 24px;
+
+  h3 {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+
+  .empty-state {
+    background: var(--dark-bg-tertiary);
+    border: 2px dashed var(--border-light);
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    color: var(--text-muted);
+
+    p {
+      margin: 0;
+      font-size: 14px;
+    }
+  }
+
+  .ordonnances-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ordonnance-card {
+    background: var(--dark-bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(74, 158, 255, 0.15);
+      border-color: var(--primary-color);
+    }
+
+    &.expired {
+      opacity: 0.8;
+      border-color: var(--danger-color);
+
+      .card-header {
+        background: rgba(239, 68, 68, 0.08);
+      }
+    }
+
+    .card-header {
+      background: var(--dark-bg-tertiary);
+      border-bottom: 2px solid var(--border-color);
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+
+      .header-info {
+        flex: 1;
+
+        h4 {
+          margin: 0 0 4px 0;
+          font-size: 16px;
+          font-weight: 600;
+          color: var(--primary-color);
+        }
+
+        .date {
+          margin: 0;
+          font-size: 13px;
+          color: var(--text-muted);
+          font-weight: 500;
+        }
+      }
+
+      .status-badge {
+        padding: 6px 12px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+
+        &.valid {
+          background-color: rgba(16, 185, 129, 0.15);
+          color: var(--success-light);
+          border: 1px solid var(--success-color);
+        }
+
+        &.expired {
+          background-color: rgba(239, 68, 68, 0.15);
+          color: var(--danger-light);
+          border: 1px solid var(--danger-color);
+        }
+      }
+
+      .btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &.btn-sm {
+          padding: 4px 8px;
+          font-size: 11px;
+        }
+
+        &.btn-danger {
+          background-color: #B74444;
+          color: white;
+
+          &:hover {
+            background-color: #952d2d;
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+
+    .card-body {
+      padding: 16px;
+
+      .medications-section {
+        margin-bottom: 16px;
+
+        h5 {
+          margin: 0 0 12px 0;
+          font-size: 13px;
+          font-weight: 600;
+          color: #333;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .medications-list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .medication-item {
+          background: #f8f9fa;
+          border: 1px solid #e0e0e0;
+          border-left: 3px solid #0B5394;
+          border-radius: 4px;
+          padding: 12px;
+
+          .medication-info {
+            h6 {
+              margin: 0 0 8px 0;
+              font-size: 14px;
+              font-weight: 600;
+              color: #0B5394;
+            }
+
+            .details {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 8px;
+              font-size: 12px;
+
+              li {
+                margin: 0;
+                color: #555;
+
+                strong {
+                  color: #333;
+                  font-weight: 600;
+                }
+              }
+
+              @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+              }
+            }
+          }
+        }
+      }
+
+      .section {
+        margin-bottom: 16px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        h5 {
+          margin: 0 0 8px 0;
+          font-size: 13px;
+          font-weight: 600;
+          color: #333;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        p {
+          margin: 0;
+          font-size: 14px;
+          color: #555;
+          line-height: 1.5;
+          padding: 8px;
+          background: #f8f9fa;
+          border-left: 3px solid #0B5394;
+          border-radius: 2px;
+        }
+      }
+
+      .meta {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #e8e8e8;
+        color: #999;
+
+        small {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
