@@ -206,7 +206,111 @@
     </div>
 
     <div class="form-section">
-      <h3>Consentement</h3>
+      <h3>Antécédents Médicaux</h3>
+      <div formArrayName="antecedents" class="form-array">
+        <div *ngFor="let control of antecedents.controls; let i = index; trackBy: trackByIndex" class="form-array-item">
+          <div class="form-row">
+            <div class="form-group full-width">
+              <input
+                [formControlName]="i"
+                type="text"
+                placeholder="Ex: Diabète type 2, HTA, Asthme..."
+                class="form-control"
+                [class.is-invalid]="submitted && control.invalid"
+              />
+              <div class="error" *ngIf="submitted && control.invalid">
+                L'antécédent est requis
+              </div>
+            </div>
+            <button
+              type="button"
+              (click)="removeAntecedent(i)"
+              class="btn btn-danger btn-sm"
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="addAntecedent()" class="btn btn-secondary btn-sm">
+        + Ajouter Antécédent
+      </button>
+    </div>
+
+    <div class="form-section">
+      <h3>Allergies</h3>
+      <div formArrayName="allergies" class="form-array">
+        <div *ngFor="let allergyGroup of allergies.controls; let i = index; trackBy: trackByIndex" class="form-array-item">
+          <div [formGroupName]="i" class="nested-form-group">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Substance *</label>
+                <input
+                  formControlName="substance"
+                  type="text"
+                  placeholder="Ex: Pénicilline, Cacahuètes..."
+                  class="form-control"
+                  [class.is-invalid]="submitted && allergyGroup.get('substance')?.invalid"
+                />
+                <div class="error" *ngIf="submitted && allergyGroup.get('substance')?.invalid">
+                  Substance requise
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Réaction *</label>
+                <input
+                  formControlName="reaction"
+                  type="text"
+                  placeholder="Ex: Rougeurs, Œdème..."
+                  class="form-control"
+                  [class.is-invalid]="submitted && allergyGroup.get('reaction')?.invalid"
+                />
+                <div class="error" *ngIf="submitted && allergyGroup.get('reaction')?.invalid">
+                  Réaction requise
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Sévérité *</label>
+                <select
+                  formControlName="severite"
+                  class="form-control"
+                  [class.is-invalid]="submitted && allergyGroup.get('severite')?.invalid"
+                >
+                  <option value="legere">Légère</option>
+                  <option value="moderee">Modérée</option>
+                  <option value="severe">Sévère</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Date Déclaration *</label>
+                <input
+                  formControlName="dateDeclaration"
+                  type="date"
+                  class="form-control"
+                  [class.is-invalid]="submitted && allergyGroup.get('dateDeclaration')?.invalid"
+                />
+              </div>
+
+              <button
+                type="button"
+                (click)="removeAllergie(i)"
+                class="btn btn-danger btn-sm"
+              >
+                Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="addAllergie()" class="btn btn-secondary btn-sm">
+        + Ajouter Allergie
+      </button>
+    </div>
+
+    <div class="form-section">
 
       <div class="form-group checkbox">
         <input

@@ -5,7 +5,9 @@
 
   <div class="patient-card__header">
     <div class="header-name">
-      <h3>{{ patient.prenom }} {{ patient.nom }}</h3>
+      <h3 appHighlight [highlightColor]="'yellow'">
+        {{ patient.prenom }} {{ patient.nom }}
+      </h3>
       <span class="age">{{ age }} ans</span>
     </div>
     <div class="header-urgency">
@@ -21,8 +23,10 @@
     <!-- INS (masqué si !showSensitiveData) -->
     <div class="info-row">
       <span class="label">INS:</span>
-      <span class="value">
-        {{ showSensitiveData ? (patient.ins | insFormat) : '***' }}
+      <span class="value" 
+            appSensitiveData="INS" 
+            [canView]="showSensitiveData">
+        {{ patient.ins | insFormat }}
       </span>
     </div>
 

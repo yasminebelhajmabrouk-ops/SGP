@@ -5,10 +5,11 @@ import { takeUntil } from 'rxjs/operators';
 import { Patient } from '../../models/patient.model';
 import { InsFormatPipe } from '../../../../shared/pipes/ins-format-pipe';
 import { trackByIndex } from '../../../../shared/utils/trackBy.util';
+import { SensitiveDataDirective, HighlightDirective } from '../../../../shared/directives';
 
 @Component({
   selector: 'app-patient-card',
-  imports: [CommonModule, InsFormatPipe],
+  imports: [CommonModule, InsFormatPipe, SensitiveDataDirective, HighlightDirective],
   templateUrl: './patient-card.html',
   styleUrl: './patient-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
