@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a2332 0%, #1e3a4c 100%);
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
   padding: 20px;
 }
 
@@ -56,7 +56,7 @@ form {
     border-radius: 4px;
     font-size: 14px;
     transition: all 0.3s ease;
-    background-color: var(--dark-bg-tertiary);
+    background-color: #ffffff;
     color: var(--text-primary);
 
     &:hover {
@@ -66,27 +66,23 @@ form {
     &:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.15);
-      background-color: var(--dark-bg-tertiary);
+      box-shadow: 0 0 0 3px rgba(11, 83, 148, 0.1);
+      background-color: #ffffff;
     }
 
     &.is-invalid {
       border-color: var(--danger-color);
-      background-color: rgba(239, 68, 68, 0.08);
+      background-color: rgba(220, 38, 38, 0.05);
 
       &:focus {
-        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
       }
     }
-  }
-
-  select {
-    cursor: pointer;
   }
 }
 
 .error-message {
-  color: #B74444;
+  color: #dc2626;
   font-size: 12px;
   margin-top: 4px;
 
@@ -126,7 +122,7 @@ form {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #0B5394 0%, #117A8B 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   color: white;
   padding: 12px 20px;
   border: none;

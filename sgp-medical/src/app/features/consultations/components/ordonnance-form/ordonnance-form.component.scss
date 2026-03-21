@@ -46,18 +46,18 @@
       font-size: 14px;
       font-family: inherit;
       transition: all 0.2s ease;
-      background-color: var(--dark-bg-tertiary);
+      background-color: #ffffff;
       color: var(--text-primary);
 
       &:focus {
         outline: none;
         border-color: var(--primary-color);
-        box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.15);
+        box-shadow: 0 0 0 3px rgba(11, 83, 148, 0.1);
       }
 
       &.is-invalid {
         border-color: var(--danger-color);
-        background-color: rgba(239, 68, 68, 0.08);
+        background-color: rgba(220, 38, 38, 0.05);
       }
     }
 
@@ -68,16 +68,16 @@
 
     .error {
       font-size: 12px;
-      color: #fca5a5;
+      color: var(--danger-color);
       font-weight: 500;
     }
   }
 
   .medications-section {
-    border: 1px solid #3a3a3a;
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 16px;
-    background: #2a2a2a;
+    background: var(--dark-bg-secondary);
 
     .medications-header {
       display: flex;
@@ -85,13 +85,13 @@
       align-items: center;
       margin-bottom: 16px;
       padding-bottom: 12px;
-      border-bottom: 2px solid #3a3a3a;
+      border-bottom: 2px solid var(--border-color);
 
       h4 {
         margin: 0;
         font-size: 16px;
         font-weight: 600;
-        color: #3b82f6;
+        color: var(--primary-color);
       }
 
       .btn-sm {
@@ -107,10 +107,10 @@
     }
 
     .medication-item {
-      border: 1px solid #e8e8e8;
+      border: 1px solid var(--border-light);
       border-radius: 6px;
       padding: 16px;
-      background: #fafafa;
+      background: #fafbfc;
 
       .medication-header {
         display: flex;
@@ -122,7 +122,7 @@
           margin: 0;
           font-size: 14px;
           font-weight: 600;
-          color: #333;
+          color: var(--text-primary);
         }
 
         .btn-sm {
@@ -170,29 +170,29 @@
       }
 
       &.btn-primary {
-        background-color: #0B5394;
+        background-color: var(--primary-color);
         color: white;
 
         &:hover {
-          background-color: #083d6b;
+          background-color: var(--primary-dark);
         }
       }
 
       &.btn-secondary {
-        background-color: #e0e0e0;
-        color: #333;
+        background-color: var(--border-light);
+        color: var(--text-primary);
 
         &:hover {
-          background-color: #d0d0d0;
+          background-color: var(--border-color);
         }
       }
 
       &.btn-danger {
-        background-color: #B74444;
+        background-color: var(--danger-color);
         color: white;
 
         &:hover {
-          background-color: #952d2d;
+          background-color: var(--primary-dark);
         }
       }
     }

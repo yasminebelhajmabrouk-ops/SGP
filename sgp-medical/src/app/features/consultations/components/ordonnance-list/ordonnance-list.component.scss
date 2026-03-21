@@ -36,7 +36,7 @@
     transition: all 0.2s ease;
 
     &:hover {
-      box-shadow: 0 4px 12px rgba(74, 158, 255, 0.15);
+      box-shadow: 0 4px 12px rgba(11, 83, 148, 0.1);
       border-color: var(--primary-color);
     }
 
@@ -45,7 +45,7 @@
       border-color: var(--danger-color);
 
       .card-header {
-        background: rgba(239, 68, 68, 0.08);
+        background: rgba(220, 38, 38, 0.05);
       }
     }
 

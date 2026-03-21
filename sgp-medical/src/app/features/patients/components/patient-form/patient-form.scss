@@ -80,32 +80,32 @@
 
   .form-control {
     padding: 10px 12px;
-    border: 1px solid #3a3a3a;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     font-size: 14px;
     font-family: inherit;
     transition: all 0.3s ease;
-    background-color: #2a2a2a;
-    color: #e0e0e0;
+    background-color: #ffffff;
+    color: var(--text-primary);
 
     &:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(11, 83, 148, 0.1);
     }
 
     &.is-invalid {
-      border-color: #ef4444;
-      background-color: rgba(239, 68, 68, 0.1);
+      border-color: var(--danger-color);
+      background-color: rgba(220, 38, 38, 0.05);
 
       &:focus {
-        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
       }
     }
   }
 
   .error {
-    color: #fca5a5;
+    color: var(--danger-color);
     font-size: 12px;
     margin-top: 5px;
   }
@@ -139,7 +139,7 @@
 
     &:hover {
       background: var(--primary-dark);
-      box-shadow: 0 4px 8px rgba(74, 158, 255, 0.3);
+      box-shadow: 0 4px 8px rgba(11, 83, 148, 0.2);
     }
 
     &:active {
