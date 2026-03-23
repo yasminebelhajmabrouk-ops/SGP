@@ -1,17 +1,23 @@
 <div class="login-container">
   <div class="login-box">
-    <h1>Connexion</h1>
-    <p class="subtitle">SGP - Système de Gestion de Patients</p>
+    <div class="header">
+      <div class="logo-icon">🏥</div>
+      <h1>SGP Médical</h1>
+      <p class="subtitle">Système de Gestion de Patients</p>
+    </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <!-- Email -->
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">
+          <span class="icon">✉️</span>
+          Email
+        </label>
         <input
           id="email"
           type="email"
           formControlName="email"
-          placeholder="exemple@medical.fr"
+          placeholder="votre.email@example.com"
           [class.is-invalid]="submitted && email?.invalid"
         />
         <div class="error-message" *ngIf="submitted && email?.invalid">
@@ -22,12 +28,15 @@
 
       <!-- Password -->
       <div class="form-group">
-        <label for="password">Mot de passe</label>
+        <label for="password">
+          <span class="icon">🔒</span>
+          Mot de passe
+        </label>
         <input
           id="password"
           type="password"
           formControlName="password"
-          placeholder="Minimum 6 caractères"
+          placeholder="Entrez votre mot de passe"
           [class.is-invalid]="submitted && password?.invalid"
         />
         <div class="error-message" *ngIf="submitted && password?.invalid">
@@ -38,18 +47,15 @@
 
       <!-- Role Selection -->
       <div class="form-group">
-        <label for="role">Rôle</label>
+        <label for="role">
+          <span class="icon">👤</span>
+          Rôle
+        </label>
         <select id="role" formControlName="role">
           <option *ngFor="let r of roles; trackBy: trackByIndex" [value]="r">
-            {{ r | titlecase }}
+            {{ getRoleLabel(r) }}
           </option>
         </select>
-      </div>
-
-      <!-- Demo Info -->
-      <div class="info-box">
-        <p><strong>Mode Démo:</strong> Utilisez n'importe quel email/mot de passe pour tester.</p>
-        <p><strong>Rôles disponibles:</strong> Médecin, Infirmier, Admin, Patient</p>
       </div>
 
       <!-- Submit Button -->
@@ -58,8 +64,13 @@
         class="btn-primary"
         [disabled]="loading || loginForm.invalid"
       >
-        {{ loading ? 'Connexion...' : 'Se connecter' }}
+        <span class="button-icon">→</span>
+        {{ loading ? 'Connexion en cours...' : 'Se connecter' }}
       </button>
     </form>
+
+    <div class="footer">
+      <p>Connexion sécurisée | SGP © 2024</p>
+    </div>
   </div>
 </div>

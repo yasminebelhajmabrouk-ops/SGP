@@ -26,6 +26,13 @@ export class LoginComponent implements OnInit {
   roles = ['medecin', 'infirmier', 'admin', 'patient'];
   trackByIndex = trackByIndex;
 
+  private roleLabels: { [key: string]: string } = {
+    medecin: 'Médecin',
+    infirmier: 'Infirmier',
+    admin: 'Administrateur',
+    patient: 'Patient'
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -43,6 +50,10 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       role: ['medecin', Validators.required]
     });
+  }
+
+  getRoleLabel(role: string): string {
+    return this.roleLabels[role] || role;
   }
 
   onSubmit(): void {

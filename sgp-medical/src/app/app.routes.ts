@@ -34,8 +34,16 @@ export const routes: Routes = [
     data: { roles: ['medecin', 'admin'] },
   },
   {
+    path: 'tableau-bord',
+    loadChildren: () =>
+      import('./features/tableau-bord/tableau-bord.module').then(
+        (m) => m.TableauBordModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: '',
-    redirectTo: '/patients',
+    redirectTo: '/tableau-bord',
     pathMatch: 'full',
   },
   {

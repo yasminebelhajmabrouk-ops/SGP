@@ -1,0 +1,82 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="header-content">
+      <h1>📊 Tableau de Bord Clinique</h1>
+      <p class="header-date">{{ dateActuelle | date: 'dd MMMM yyyy' }}</p>
+    </div>
+    <div class="header-actions">
+    </div>
+  </div>
+
+  <!-- Section Statistiques -->
+  <section class="dashboard-section">
+    <h2 class="section-title">Statistiques Principales</h2>
+    <div class="statistiques-grid" *ngIf="statistiques$ | async as stats">
+      <div class="stat-card" *ngFor="let stat of stats">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-content">
+          <p class="stat-label">{{ stat.title }}</p>
+          <div class="stat-value">
+            <span class="value">{{ stat.value }}</span>
+            <span class="unit">{{ stat.unit }}</span>
+          </div>
+          <div class="stat-trend" [style.color]="stat.trend >= 0 ? '#10b981' : '#ef4444'">
+            <span>{{ stat.trend >= 0 ? '↑' : '↓' }} {{ Math.abs(stat.trend) }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dashboard-grid">
+    <!-- Section Alertes -->
+    <section class="dashboard-section alertes-section">
+      <h2 class="section-title">
+        <span class="title-icon">⚠️</span> Alertes et Notifications
+      </h2>
+      <div class="alertes-container" *ngIf="alertes$ | async as alertes">
+        <div *ngIf="alertes.length === 0" class="empty-state">
+          <p>✓ Aucune alerte en attente</p>
+        </div>
+        <div class="alerte-card" *ngFor="let alerte of alertes" [style.border-left-color]="getAlertColor(alerte.type)">
+          <div class="alerte-header">
+            <span class="alerte-icon">{{ getAlertIcon(alerte.type) }}</span>
+            <div class="alerte-info">
+              <p class="alerte-patient">{{ alerte.patient }}</p>
+              <p class="alerte-time">{{ alerte.timestamp | date: 'HH:mm' }}</p>
+            </div>
+          </div>
+          <p class="alerte-message">{{ alerte.message }}</p>
+          <!-- Buttons supprimés -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Planning -->
+    <section class="dashboard-section planning-section">
+      <h2 class="section-title">
+        <span class="title-icon">📅</span> Planning d'Aujourd'hui
+      </h2>
+      <div class="planning-container" *ngIf="consultations$ | async as consultations">
+        <div *ngIf="consultations.length === 0" class="empty-state">
+          <p>Aucune consultation prévue</p>
+        </div>
+        <div class="consultation-item" *ngFor="let consultation of consultations">
+          <div class="time-marker">
+            <span class="time-hour">{{ consultation.heure }}</span>
+          </div>
+          <div class="consultation-card" [style.border-left-color]="getStatutColor(consultation.statut)">
+            <div class="consultation-header">
+              <p class="patient-name">{{ consultation.patient }}</p>
+              <span class="statut-badge" [style.background-color]="getStatutColor(consultation.statut)">
+                {{ consultation.statut }}
+              </span>
+            </div>
+            <p class="consultation-type">📌 {{ consultation.type }}</p>
+            <p class="consultation-medecin">👨‍⚕️ {{ consultation.medecin }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
