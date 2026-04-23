@@ -1,6 +1,5 @@
 Installation et exécution
-
-Frontend (Angular)
+_#Frontend (Angular)
 
 cd sgp-medical
 
